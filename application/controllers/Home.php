@@ -20,8 +20,10 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-        $this->load->view('public/pub_header');
-        $this->load->view('public/pub_home');
+        $data['title'] = "Koperasi Karyawan | Login";
+        
+        $this->load->view('public/pub_header', $data);
+        $this->load->view('public/pub_home', $data);
         $this->load->view('public/pub_footer');
 	}
 }
