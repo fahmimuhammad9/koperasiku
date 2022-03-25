@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Home extends CI_Controller
+{
 
 	/**
 	 * Index Page for this controller.
@@ -20,10 +21,38 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-        $data['title'] = "Koperasi Karyawan | Login";
-        
-        $this->load->view('public/pub_header', $data);
-        $this->load->view('public/pub_home', $data);
-        $this->load->view('public/pub_footer');
+		$data['title'] = "Koperasi Karyawan | Login";
+
+		$this->load->view('public/pub_header', $data);
+		$this->load->view('public/pub_home', $data);
+		$this->load->view('public/pub_footer');
+	}
+
+	public function register()
+	{
+		$this->form_validation->set_rules('fullname','Fullname','required|trim', [
+			'required' => 'Masukkan Nama Lengkap'
+		]);
+		$this->form_validation->set_rules('email','Email','required|valid_email|is_unique[user.useremail]',[
+			'required' => 'Masukkan Email',
+			'valid_email' => 'Email Tidak Valid',
+			'is_unique' => 'Email Telah Terdaftar'
+		]);
+		$this->form_validation->set_rules('password','Password','required|min_length[8]',[
+			'required' => 'Masukkan Password',
+			'min_length' => 'Password Minimal 8 Karakter'
+		]);
+
+		if($this->form_validtion->run() == false ){
+			$data['title'] = "Register @Koperasi Karyawan";
+
+			$this->load->view('public/pub_header', $data);
+			$this->load->view('public/pub_register', $data);
+			$this->load->view('public/pub_footer');	
+		} else {
+			$in = 
+		}
+
+
 	}
 }
